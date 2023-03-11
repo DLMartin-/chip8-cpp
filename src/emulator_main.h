@@ -1,2 +1,9 @@
+#include <SDL.h>
 
-int emulator_main(int argc, char *argv[]) noexcept;
+struct EmulatorArgs {
+  SDL_Window* window;
+  SDL_Renderer* renderer;
+};
+
+int emulator_main(EmulatorArgs args) noexcept;
+
