@@ -1,10 +1,12 @@
 #include <SDL_video.h>
+#include <algorithm>
 #include <cstdlib>
 #include <SDL.h>
 #include <optional>
 #include <iostream>
 
 #include "src/emulator_main.h"
+#include "src/rom.h"
 
 SDL_Window* window;
 SDL_Renderer* renderer;
@@ -19,7 +21,13 @@ auto main(int argc, char *argv[]) -> int {
     return -1;
   }
 
-  return emulator_main(args.value());
+  auto const rom = load_rom("data/IBM Logo.ch8");
+  if(!rom.has_value()) {
+    std::cout << "Could not load the ROM!\n";
+    return -1;
+  }
+
+  return emulator_main(args.value(), rom.value());
 }
 
 void register_atexit() noexcept {

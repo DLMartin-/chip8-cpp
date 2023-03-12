@@ -7,7 +7,7 @@
 #include <iostream>
 #include <optional>
 
-int emulator_main(EmulatorArgs args) noexcept {
+int emulator_main(EmulatorArgs args, Rom const& rom) noexcept {
   auto const [window, renderer] = args;
   SDL_Event event{};
   while (true) {
